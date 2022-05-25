@@ -1,0 +1,25 @@
+<html xmlns:th="http://thymeleaf.org">
+	<head>
+		<title>Online Transactions</title>
+		<link rel="stylesheet" href="/css/transactions.css"/>
+	</head>
+	<body>
+		<h2>Transaction History</h2>
+		
+		<table>
+			<tr>
+				<th>ID</th>
+				<th>Date</th>
+				<th>Retailer</th>
+				<th>Funds In</th>
+				<th>Funds Out</th>
+			<tr th:each="storedTransaction : ${transactions}" >
+				<td><a th:href="@{/transactions/{transactionId}(transactionId=${storedTransaction.id})}" target="_new">[[${storedTransaction.id}]]</a></td>
+				<td th:inline ="text">[[${storedTransaction.date}]]</td>
+				<td th:inline ="text">[[${storedTransaction.retailer}]]</td>
+				<td th:text="${storedTransaction.type == 'C'} ? ${storedTransaction.amount} : ${null}"></td>
+				<td th:text="${storedTransaction.type == 'D'} ? ${storedTransaction.amount} : ${null}"></td>	
+			</tr>
+		
+	</body>
+</html>
